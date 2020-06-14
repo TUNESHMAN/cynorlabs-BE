@@ -6,12 +6,14 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex("forms").insert([
         {
+          id: 1,
           doctor_name: "Ben",
           department: "Psychology",
           doctors_rank: 5,
           task_description: "Worked on mental stability of a patient",
         },
         {
+          id: 2,
           doctor_name: "Tom",
           department: "Dermatology",
           doctors_rank: 3,
@@ -19,12 +21,14 @@ exports.seed = function (knex) {
             "Collaborated with another doctor on a patient's skin surgery",
         },
         {
+          id: 3,
           doctor_name: "Matt",
           department: "Dentistry",
           doctors_rank: 4,
           task_description: "Flossing of woman's teeth",
         },
         {
+          id: 4,
           doctor_name: "Debby",
           department: "Gynaecology",
           doctors_rank: 2,
