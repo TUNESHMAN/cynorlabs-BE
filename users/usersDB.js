@@ -1,5 +1,5 @@
 // Bring in the db config
-const userdb = require("./usersDB");
+const userdb = require("../data/db-config");
 
 // The helper functions for the users database
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
   getUser,
 };
 
-function addUser(username, password, isManager) {
+function addUser({ username, password, isManager }) {
   return userdb("users").insert({ username, password, isManager });
 }
 

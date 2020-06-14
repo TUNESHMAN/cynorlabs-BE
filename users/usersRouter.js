@@ -1,7 +1,7 @@
 // Bring in express
 const express = require("express");
 // We will need bcryptjs for hashing passwords
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 // Bring in the helper functions from usersDB
 const users = require("./usersDB");
 // Import the router
@@ -14,7 +14,7 @@ router.post("/register", (req, res) => {
   const { username, password, isManager } = req.body;
   //   We hash the password
   const bcryptHash = bcrypt.hashSync(password, 10);
-  const newUser = { username, bcryptHash, isManager };
+  const newUser = { username, password: bcryptHash, isManager };
   users
     .addUser(newUser)
     .then((member) => {
