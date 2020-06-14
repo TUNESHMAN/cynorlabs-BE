@@ -5,6 +5,7 @@ exports.up = function (knex) {
     table.string("doctor_name").notNullable();
     table.string("department").notNullable();
     table.integer("doctors_rank").notNullable();
+    tables.string("task_description").notNullable()
   });
 };
 
