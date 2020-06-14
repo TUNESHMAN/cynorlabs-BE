@@ -1,8 +1,10 @@
 // The db-config has knowledge of our knex file. It is where our configuration is done
 const knex = require("knex");
-const knexfile = require("../knexfile");
+const config = require("../knexfile");
 
-const database = "development";
+const env = process.env.NODE._ENV || "development";
 
-// Export the configuration
-module.exports = knex(knexfile[database]);
+const configOptions = config[env];
+
+// Export the configuration file
+module.exports = knex(configOptions);
