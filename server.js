@@ -10,7 +10,7 @@ server.use(express.json());
 server.use(cors());
 server.use(helmet());
 server.use(logger);
-// server.use("/api/form", formRouter);
+server.use("/api/form", formRouter);
 
 // Flesh out a dummy API
 server.get("/", (req, res) => {
