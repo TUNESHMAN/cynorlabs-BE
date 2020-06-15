@@ -14,10 +14,10 @@ function getForms() {
 }
 
 function postForms(
-  doctor_name,
+  {doctor_name,
   department,
   doctors_rank,
-  task_description,
+  task_description,}
 ) {
   // This is the SQL equivalent of INSERT INTO forms (doctor_name, department, doctors_rank,task_description) VALUES (data to be added)
   return db("forms").insert({

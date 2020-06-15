@@ -24,7 +24,7 @@ router.get("/", restricted, checkRole, (req, res) => {
 });
 
 // Endpoint for adding forms
-router.post("/", restricted, (req, res) => {
+router.post("/", restricted, validateForm, (req, res) => {
   // We are adding a new form so we need req.body
   const newForm = req.body;
   form
@@ -52,5 +52,23 @@ router.delete("/:id", restricted, checkRole, (req, res) => {
       res.status(500).json({ message: error.message, stack: error.stack });
     });
 });
+
+// Middleware for validating forms to ensure fields are correct
+function validateForm(req, res, next) {
+  const NewForm = req.body;
+  if (Object.keys(NewForm).length === 0) {
+    res.status(400).json({ message: "Invalid inputs" });
+  } else if (!NewForm.doctor_name) {
+    res.status(400).json({ message: "Name of the doctor is needed" });
+  } else if (!NewForm.department) {
+    res.status(400).json({ message: "department column is empty" });
+  } else if (!NewForm.doctors_rank) {
+    res.status(400).json({ message: "no rank inputted" });
+  } else if (!NewForm.task_description) {
+    res.status(400).json({ message: "task column must be filled" });
+  } else {
+    next();
+  }
+}
 
 module.exports = router;
