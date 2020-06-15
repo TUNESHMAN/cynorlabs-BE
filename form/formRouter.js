@@ -1,4 +1,7 @@
 const express = require("express");
+const restricted = require("../auth/restricted-middleware");
+// To check if the user is a manager or not
+const checkRole = require("../auth/check-manager-middleware");
 
 // Import the helper functions and save it in a variable
 const form = require("./formDB");
@@ -9,7 +12,7 @@ const router = express.Router();
 // The forms endpoints here 👇👇👇
 
 // Endpoint for getting forms
-router.get("/", (req, res) => {
+router.get("/", restricted, checkRole, (req, res) => {
   form
     .getForms()
     .then((formInfo) => {

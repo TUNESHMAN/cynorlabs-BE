@@ -6,6 +6,8 @@ const bcrypt = require("bcryptjs");
 const users = require("./usersDB");
 // Import the router
 const router = express.Router();
+// Bring in the generateToken function from its folder
+const genToken = require("../auth/token");
 
 // Users endpoints here 👇👇👇
 
@@ -33,10 +35,13 @@ router.post("/login", (req, res) => {
     .then((member) => {
       if (member && bcrypt.compareSync(auth_user.password, member.password)) {
         //   If the password is okay and the user is on the database, we want to create a token
-        const token = generateToken(member);
+        const token = genToken(member);
         res
           .status(200)
-          .json({ message: `Logged in successfully, ${member.username}` });
+          .json({
+            message: `Logged in successfully, ${member.username}`,
+            token,
+          });
       } else {
         res.status(500).json({ message: `Credentials are not valid` });
       }
@@ -45,8 +50,6 @@ router.post("/login", (req, res) => {
       res.status(500).json({ message: error.message, stack: error.stack });
     });
 });
-
-
 
 // The router should be exported
 module.exports = router;
