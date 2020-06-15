@@ -28,9 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.1",
     "sqlite3": "^4.2.0",
-    "uuid": "^8.1.0"
-  },
-  "devDependencies": {
+    "uuid": "^8.1.0",
     "nodemon": "^2.0.4"
   }
 }
