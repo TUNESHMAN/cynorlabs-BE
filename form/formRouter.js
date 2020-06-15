@@ -24,7 +24,7 @@ router.get("/", restricted, checkRole, (req, res) => {
 });
 
 // Endpoint for adding forms
-router.post("/", (req, res) => {
+router.post("/", restricted, (req, res) => {
   // We are adding a new form so we need req.body
   const newForm = req.body;
   form
@@ -38,7 +38,7 @@ router.post("/", (req, res) => {
 });
 
 // Endpoint for removing a form
-router.delete("/:id", (req, res) => {
+router.delete("/:id", restricted, checkRole, (req, res) => {
   //We get the id from params
   const { id } = req.params;
   form
