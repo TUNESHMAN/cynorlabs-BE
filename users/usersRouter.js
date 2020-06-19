@@ -34,12 +34,14 @@ router.post("/login", (req, res) => {
     .getUserBy(auth_user.username)
     .then((member) => {
       if (member && bcrypt.compareSync(auth_user.password, member.password)) {
+        console.log(member);
+        
         //   If the password is okay and the user is on the database, we want to create a token
         const token = genToken(member);
         res.status(200).json({
           message: `Logged in successfully, ${member.username}`,
           token,
-          role: member.role,
+          role: member.isManager,
         });
       } else {
         res.status(500).json({ message: `Credentials are not valid` });
