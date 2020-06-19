@@ -36,18 +36,21 @@ router.post("/login", (req, res) => {
       if (member && bcrypt.compareSync(auth_user.password, member.password)) {
         //   If the password is okay and the user is on the database, we want to create a token
         const token = genToken(member);
-        res
-          .status(200)
-          .json({
-            message: `Logged in successfully, ${member.username}`,
-            token,
-          });
+        res.status(200).json({
+          message: `Logged in successfully, ${member.username}`,
+          token,
+        });
       } else {
         res.status(500).json({ message: `Credentials are not valid` });
       }
     })
     .catch((error) => {
-      res.status(500).json({ message: error.message, stack: error.stack });
+      res
+        .status(500)
+        .json({
+          message: `Error login in, check your details or register`,
+          stack: error.stack,
+        });
     });
 });
 
