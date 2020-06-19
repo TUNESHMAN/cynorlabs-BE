@@ -12,7 +12,7 @@ const genToken = require("../auth/token");
 // Users endpoints here 👇👇👇
 
 // This is the register endpoint
-router.post("/register", (req, res) => {
+router.post("/register", validateUser, (req, res) => {
   const { username, password, isManager } = req.body;
   //   We hash the password
   const bcryptHash = bcrypt.hashSync(password, 10);
@@ -35,7 +35,7 @@ router.post("/login", (req, res) => {
     .then((member) => {
       if (member && bcrypt.compareSync(auth_user.password, member.password)) {
         console.log(member);
-        
+
         //   If the password is okay and the user is on the database, we want to create a token
         const token = genToken(member);
         res.status(200).json({
@@ -55,5 +55,19 @@ router.post("/login", (req, res) => {
     });
 });
 
+function validateUser(req, res, next) {
+  const NewUser = req.body;
+  if (Object.keys(NewUser).length === 0) {
+    res.status(400).json({ message: "Invalid inputs" });
+  } else if (!NewUser.username) {
+    res.status(400).json({ message: "Please choose a username" });
+  } else if (!NewUser.password) {
+    res.status(400).json({ message: "Please choose a password" });
+  } else if (!NewUser.isManager) {
+    res.status(400).json({ message: "Doctor or Manager?" });
+  } else {
+    next();
+  }
+}
 // The router should be exported
 module.exports = router;
