@@ -39,18 +39,17 @@ router.post("/login", (req, res) => {
         res.status(200).json({
           message: `Logged in successfully, ${member.username}`,
           token,
+          role: member.role,
         });
       } else {
         res.status(500).json({ message: `Credentials are not valid` });
       }
     })
     .catch((error) => {
-      res
-        .status(500)
-        .json({
-          message: `Error login in, check your details or register`,
-          stack: error.stack,
-        });
+      res.status(500).json({
+        message: `Error login in, check your details or register`,
+        stack: error.stack,
+      });
     });
 });
 
