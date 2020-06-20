@@ -63,6 +63,8 @@ function validateUser(req, res, next) {
     res.status(400).json({ message: "Please choose a username" });
   } else if (!NewUser.password) {
     res.status(400).json({ message: "Please choose a password" });
+  } else if (!NewUser.role) {
+    res.status(400).json({ message: "Please select a role" });
   } else {
     next();
   }
