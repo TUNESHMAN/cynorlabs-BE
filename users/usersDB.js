@@ -8,8 +8,8 @@ module.exports = {
   getUser,
 };
 
-function addUser({username, password, isManager}) {
-  return userdb("users").insert({ username, password, isManager });
+function addUser({username, password, role}) {
+  return userdb("users").insert({ username, password, role });
 }
 
 function getUserBy(username) {

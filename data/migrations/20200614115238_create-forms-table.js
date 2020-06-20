@@ -12,7 +12,7 @@ exports.up = function (knex) {
       user.increments();
       user.string("username", 128).unique().notNullable();
       user.string("password", 128).notNullable();
-      user.boolean("isManager").notNullable();
+      user.string("role").notNullable();
     });
 };
 

@@ -13,10 +13,10 @@ const genToken = require("../auth/token");
 
 // This is the register endpoint
 router.post("/register", validateUser, (req, res) => {
-  const { username, password, isManager } = req.body;
+  const { username, password, role } = req.body;
   //   We hash the password
   const bcryptHash = bcrypt.hashSync(password, 10);
-  const newUser = { username, password: bcryptHash, isManager };
+  const newUser = { username, password: bcryptHash, role };
   users
     .addUser(newUser)
     .then((member) => {
